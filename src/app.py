@@ -127,6 +127,13 @@ class Login(Resource):
             ret = {'jwt': 'Bearer ' + create_jwt(identity=username)}
             return ret, 200
 
+@api.route('/hello')
+class Hello(Resource):
+    @api.doc(security=None)
+    def get(self):
+        return {"Status":"Hello"}, 200
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run()
+    app.run(debug=True, host='0.0.0.0', port=80)

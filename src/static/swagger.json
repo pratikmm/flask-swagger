@@ -1,0 +1,155 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api",
+    "paths": {
+        "/login": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "post_login",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/credentials"
+                        }
+                    }
+                ],
+                "security": [],
+                "tags": [
+                    "Records"
+                ]
+            }
+        },
+        "/records": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "post_records",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/fname"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Records"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "get_records",
+                "tags": [
+                    "Records"
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "operationId": "delete_records",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Records"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Sample API",
+        "version": "1.0",
+        "description": "A sample API"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "apikey": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "security": [
+        {
+            "apikey": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Records",
+            "description": "record operations"
+        }
+    ],
+    "definitions": {
+        "fname": {
+            "properties": {
+                "fname": {
+                    "type": "string",
+                    "default": "Enter first name"
+                }
+            },
+            "type": "object"
+        },
+        "id": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "default": "Enter id of record"
+                }
+            },
+            "type": "object"
+        },
+        "credentials": {
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "default": "Enter username"
+                },
+                "password": {
+                    "type": "string",
+                    "default": "Enter password"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}
