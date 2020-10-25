@@ -21,7 +21,7 @@ authorizations = {
 }
 
 api = Api(blueprint, authorizations=authorizations, security='apikey', version='1.0', title='Sample API',
-    description='A sample API', default="Records", default_label="record operations")#), doc='/documentation')#, doc=False
+    description='Swagger API Documentation', default="Records", default_label="record operations")#), doc='/documentation')#, doc=False
 
 #loginapi = Api(blueprint, default="Authentication", default_label="Records")#), doc='/documentation')#, doc=False
 

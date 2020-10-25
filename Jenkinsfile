@@ -4,7 +4,9 @@ pipeline {
 
       registryCredential = 'dockerpratik' 
 
-      dockerImage = 'flask-swagger' 
+      dockerImage = 'flask-swagger'
+      
+      containerName = 'flask_server'
 
   }
 
@@ -36,7 +38,7 @@ pipeline {
 
       }
 
-      stage('Deploy our image') { 
+      stage('Pushing our image') { 
 
           steps { 
 
@@ -51,18 +53,30 @@ pipeline {
               } 
 
           }
-
-      } 
+      }
       stage('Deploy docker run') { 
 
-          steps { 
-                sh 'docker run -p 80:80 $dockerImage'
-
+          steps {
+                sh '''
+                if [ ! "$(docker ps -q -f name=$containerName)" ]; then
+                    if [ "$(docker ps -aq -f status=exited -f name=$containerName)" ]; then
+                    # cleanup
+                    docker rm $containerName
+                    fi
+                    if [ "$(docker ps -aq -f status=running -f name=$containerName)" ]; then
+                    #stop
+                    docker stop $containerName
+                    # cleanup
+                    docker rm $containerName
+                    fi
+                # run your container
+                docker run -d --name flask-server -p 80:80 $registry:$BUILD_NUMBER
+                fi
+                '''
               } 
 
           }
 
-      } 
 
       stage('Cleaning up') { 
 
