@@ -2,11 +2,11 @@ pipeline {
     environment { 
         registry = "dockerpratik/flask-swagger" 
 
-      registryCredential = 'dockerpratik' 
+        registryCredential = 'dockerpratik' 
 
-      dockerImage = 'flask-swagger'
+        dockerImage = 'flask-swagger'
       
-      containerName = 'flask_server'
+        containerName = 'flask_server'
 
   }
 
@@ -14,7 +14,7 @@ pipeline {
 
   stages { 
 
-      stage('Cloning our Git') { 
+      stage('Cloning Github repo') { 
 
           steps { 
 
@@ -24,7 +24,7 @@ pipeline {
 
       } 
 
-      stage('Building our image') { 
+      stage('Building Docker image') { 
 
           steps { 
 
@@ -38,15 +38,15 @@ pipeline {
 
       }
 
-      stage('Pushing our image') { 
+      stage('Pushing image to Dockerhub') { 
 
           steps { 
 
               script { 
 
-                  docker.withRegistry( '', registryCredential ) { 
+                    docker.withRegistry( '', registryCredential ) { 
 
-                      dockerImage.push() 
+                    dockerImage.push() 
 
                   }
 
@@ -54,7 +54,7 @@ pipeline {
 
           }
       }
-      stage('Deploy docker run') { 
+      stage('Deeploying Docker container') { 
 
           steps {
                 sh '''
@@ -80,7 +80,7 @@ pipeline {
           }
 
 
-      stage('Cleaning up') { 
+      stage('Cleaning up local docker image') { 
 
           steps { 
 
