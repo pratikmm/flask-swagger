@@ -53,6 +53,16 @@ pipeline {
           }
 
       } 
+      stage('Deploy docker run') { 
+
+          steps { 
+                sh 'docker run -p 80:80 $dockerImage'
+
+              } 
+
+          }
+
+      } 
 
       stage('Cleaning up') { 
 
