@@ -72,7 +72,7 @@ pipeline {
                     docker rm $containerName
                     fi
                 # run your container
-                docker run -d --name flask-server -p 80:80 $registry:$BUILD_NUMBER
+                docker run -d --name $containerName -p 80:80 $registry:$BUILD_NUMBER
                 fi
                 '''
               } 
