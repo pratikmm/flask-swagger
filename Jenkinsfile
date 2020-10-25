@@ -65,8 +65,10 @@ pipeline {
                     fi
                     if [ "$(docker ps -aq -f status=running -f name=$containerName)" ]; then
                     #stop
+                    echo "stopping container"
                     docker stop $containerName
                     # cleanup
+                    echo "removing container"
                     docker rm $containerName
                     fi
                 # run your container

@@ -131,7 +131,7 @@ class Login(Resource):
 class Hello(Resource):
     @api.doc(security=None)
     def get(self):
-        return {"Status":"Hello"}, 200
+        return {"Status":"Hello World"}, 200
 
 
 if __name__ == '__main__':
